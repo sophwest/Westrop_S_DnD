@@ -12,13 +12,18 @@ puzzleBoard = document.querySelector(".puzzle-board");
 // functions go in the middle
 // these are the "actions" that should happen
 function changeBGImage() {
-	debugger;
+	// let newBGPath = "images/backGround" + this.id + ".jpg"
+	// debugger;
 	// object.property = "new value"
 	// theHeadLine.textContent = "Drag and Drop is so fun!";
 	// theHeadLine.classList.add("yellow");
 
 	// change the background image in the dropzone
-	puzzleBoard.style.backgroundImage = 'url("../images/backGround"' + this.id + '".jpg")';
+	// puzzleBoard.style.backgroundImage = "url('images/backGround'" + this.id + "'.jpg')";
+	
+	// the `${}` is called a Javascript Template String - whatever sis inside the curly braces is evaluated at runtime and interpolated (replaces the bracket notation)
+	//you can use variables, functions, etc inline in your code this way
+	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
 }
 
 // event handling at the bottom - how is the user going to interact w the elements/controls you provide?
