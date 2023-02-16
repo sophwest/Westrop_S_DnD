@@ -10,9 +10,9 @@ theHeadLine = document.querySelector('#headLine h1'),
 //collect all of the draggable pieces in the drag zone
 puzzlePieces = document.querySelectorAll ('.puzzle-pieces img'),
 //collect ALL of the drop zone elements
-dropZones = document.querySelectorAll(".drop-zone"),
+dropZones = document.querySelectorAll('.drop-zone'),
 puzzleBoard = document.querySelector('.puzzle-board'),
-tempLink = document.querySelector('a'),
+// tempLink = document.querySelector('a'),
 //set up a global variable to store a reference to the drag piece
 //i need to know this later when i drop it on a zone
 draggedPiece;
@@ -45,19 +45,19 @@ function handleDragOver(e) {
 	console.log('dragging over me!'); 
 }
 
-function handleDrop(e) {
-	//block the default bhevaiour
+function handleDrop(e) { 
 	e.preventDefault();
-	//and then do whatever you want 
-	console.log('dropped on me!'); 
-	e.target.appendChild(draggedPiece);
+	console.log('dropped something on me');
+	if (!this.hasChildNodes()) {
+        this.appendChild(draggedPiece);
+    }
 }
 
-function blockDefaultBehaviour(e) { 
-	//dont let the default behaviour of certain elements happen- block it
-	//e is short for event, in this case the nav event
-	e.preventDefault();
-}
+// function blockDefaultBehaviour(e) { 
+// 	//dont let the default behaviour of certain elements happen- block it
+// 	//e is short for event, in this case the nav event
+// 	e.preventDefault();
+// }
 
 // event handling at the bottom - how is the user going to interact w the elements/controls you provide?
 // this is how things react when you interact with them
@@ -73,4 +73,4 @@ dropZones.forEach(zone => zone.addEventListener('dragover', handleDragOver));
 dropZones.forEach(zone => zone.addEventListener('drop', handleDrop));
 
 //temp handling
-tempLink.addEventListener('click', blockDefaultBehaviour);
+// tempLink.addEventListener('click', blockDefaultBehaviour);
