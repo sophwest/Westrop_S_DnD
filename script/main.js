@@ -1,9 +1,6 @@
 // select your elements first - what is the user going to interact with?
 // these are the targets, what the "user" uses
 
-// this is a 1 to 1 connecton to an element in the DOM
-// let navButtons = document.querySelector("#buttonOne");
-
 // this is a 1 to many connecton to elements in the DOM
 let navButtons = document.querySelectorAll('#buttonHolder img'),
 theHeadLine = document.querySelector('#headLine h1'),
@@ -12,7 +9,11 @@ puzzlePieces = document.querySelectorAll ('.puzzle-pieces img'),
 //collect ALL of the drop zone elements
 dropZones = document.querySelectorAll('.drop-zone'),
 puzzleBoard = document.querySelector('.puzzle-board'),
-// tempLink = document.querySelector('a'),
+
+//trying this - yay it worked omg
+puzzlePieceCon = document.querySelector ('.puzzle-pieces'),
+
+tempLink = document.querySelector('a'),
 //set up a global variable to store a reference to the drag piece
 //i need to know this later when i drop it on a zone
 draggedPiece;
@@ -20,17 +21,13 @@ draggedPiece;
 // functions go in the middle
 // these are the "actions" that should happen
 function changeBGImage() {
-	// let newBGPath = "images/backGround" + this.id + ".jpg"
-	// debugger;
-	// object.property = "new value"
-	// theHeadLine.textContent = "Drag and Drop is so fun!";
-	// theHeadLine.classList.add("yellow");
-
 	// change the background image in the dropzone
-	// puzzleBoard.style.backgroundImage = "url('images/backGround'" + this.id + "'.jpg')";
-	
 	// the `${}` is called a Javascript Template String - whatever sis inside the curly braces is evaluated at runtime and interpolated (replaces the bracket notation)
 	//you can use variables, functions, etc inline in your code this way
+
+	//trying this - yay it worked. call the reset puzzle function before changing the image
+	resetPuzzle();
+
 	puzzleBoard.style.backgroundImage = `url(images/backGround${this.id}.jpg)`;
 }
 
@@ -53,11 +50,14 @@ function handleDrop(e) {
     }
 }
 
-// function blockDefaultBehaviour(e) { 
-// 	//dont let the default behaviour of certain elements happen- block it
-// 	//e is short for event, in this case the nav event
-// 	e.preventDefault();
-// }
+//trying this - yay it worked. resets the puzzle, sends the pieces back to the container
+function resetPuzzle() {
+	dropZones.forEach(zone => {
+		while (zone.firstChild) {
+			puzzlePieceCon.appendChild(zone.firstChild);
+		}
+	})
+}
 
 // event handling at the bottom - how is the user going to interact w the elements/controls you provide?
 // this is how things react when you interact with them
@@ -73,4 +73,4 @@ dropZones.forEach(zone => zone.addEventListener('dragover', handleDragOver));
 dropZones.forEach(zone => zone.addEventListener('drop', handleDrop));
 
 //temp handling
-// tempLink.addEventListener('click', blockDefaultBehaviour);
+tempLink.addEventListener('click', blockDefaultBehaviour);
